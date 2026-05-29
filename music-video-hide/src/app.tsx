@@ -1,10 +1,13 @@
 async function main() {
-  while (!Spicetify?.showNotification) {
-    await new Promise(resolve => setTimeout(resolve, 100));
-  }
-  
-  // Show message on start.
-  Spicetify.showNotification("Hello!");
+  const observer = new MutationObserver(() => {
+    const section = document.querySelector(".x-music-video");
+
+    if (section) {
+      (section as HTMLElement).style.display = "none";
+    }
+  });
+  console.log("test")
+  observer.observe(document.body, { childList: true, subtree: true });
 }
 
 export default main;
